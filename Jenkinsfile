@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/SamVESIT/DevOps-Assignment-1.git'
+                git branch: 'main', url: 'https://github.com/SamVESIT/DevOps-Assignment-1.git'
             }
         }
 
@@ -41,7 +41,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'pm2 restart server.js' // Modify based on deployment
+                sh 'pm2 restart server.js'
             }
         }
     }
@@ -50,13 +50,13 @@ pipeline {
         success {
             emailext subject: "Build Success: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
                      body: "Build and deployment were successful!",
-                     recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+                     to: "your-email@example.com"
         }
 
         failure {
             emailext subject: "Build Failed: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
                      body: "Build failed. Please check logs in Jenkins.",
-                     recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+                     to: "your-email@example.com"
         }
     }
 }
