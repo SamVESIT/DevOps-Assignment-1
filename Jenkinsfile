@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        NODE_VERSION = '22'
+        NODE_VERSION = '18'
     }
 
     stages {
@@ -15,7 +15,7 @@ pipeline {
         stage('Setup Node.js') {
             steps {
                 script {
-                    def nodeHome = tool name: 'NodeJS 22', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+                    def nodeHome = tool name: 'NodeJS 18', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
                     env.PATH = "${nodeHome}/bin:${env.PATH}"
                 }
             }
